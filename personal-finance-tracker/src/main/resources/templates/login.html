@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#173c2d">
+    <title>Login - Personal Finance Tracker</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+    <main class="auth-page">
+        <aside class="auth-aside">
+            <a class="brand" th:href="@{/login}" aria-label="Ledger home">
+                <span class="brand-mark" aria-hidden="true">L</span>
+                <span class="brand-name">Ledger <span class="brand-tag-light">/ Personal</span></span>
+            </a>
+            <div class="auth-copy">
+                <p class="auth-kicker">Make money feel simpler</p>
+                <h1 class="auth-headline">A little more clarity.<br><span>A lot more control.</span></h1>
+                <p class="auth-description">Bring your income and spending into one calm, clear view. Build better money habits, one day at a time.</p>
+            </div>
+            <p class="auth-footnote">A clearer view of your finances starts here.</p>
+        </aside>
+        <section class="auth-content" aria-labelledby="login-title">
+            <div class="auth-card">
+                <a class="brand auth-mobile-brand" th:href="@{/login}" aria-label="Ledger home">
+                    <span class="brand-mark" aria-hidden="true">L</span>
+                    <span class="brand-name">Ledger / Personal</span>
+                </a>
+                <p class="eyebrow">Welcome back</p>
+                <h2 class="auth-title" id="login-title">Sign in to Ledger</h2>
+                <p class="auth-subtitle">Pick up where you left off and see your finances clearly.</p>
+
+                <div th:if="${param.registered}" class="auth-alert success" role="status">Your account is ready. Sign in to get started.</div>
+                <div th:if="${error}" class="auth-alert error" role="alert" th:text="${error}"></div>
+
+                <form th:action="@{/login}" th:object="${user}" method="post">
+                    <div class="field">
+                        <label class="field-label" for="login-username">Username</label>
+                        <input id="login-username" type="text" th:field="*{username}" class="form-control" placeholder="Your username" autocomplete="username" required>
+                    </div>
+                    <div class="field">
+                        <label class="field-label" for="login-password">Password</label>
+                        <input id="login-password" type="password" th:field="*{password}" class="form-control" placeholder="Your password" autocomplete="current-password" required>
+                    </div>
+                    <button type="submit" class="primary-button">Sign in</button>
+                </form>
+                <p class="auth-switch">New to Ledger? <a th:href="@{/register}">Create an account</a></p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#173c2d">
+    <title>Register - Personal Finance Tracker</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+    <main class="auth-page">
+        <aside class="auth-aside">
+            <a class="brand" th:href="@{/login}" aria-label="Ledger home">
+                <span class="brand-mark" aria-hidden="true">L</span>
+                <span class="brand-name">Ledger <span class="brand-tag-light">/ Personal</span></span>
+            </a>
+            <div class="auth-copy">
+                <p class="auth-kicker">Start with a clear picture</p>
+                <h1 class="auth-headline">Your goals.<br><span>Your money. In sync.</span></h1>
+                <p class="auth-description">Create your personal space to track what comes in, what goes out, and the progress you’re making.</p>
+            </div>
+            <p class="auth-footnote">Simple tools for more intentional money habits.</p>
+        </aside>
+        <section class="auth-content" aria-labelledby="register-title">
+            <div class="auth-card">
+                <a class="brand auth-mobile-brand" th:href="@{/login}" aria-label="Ledger home">
+                    <span class="brand-mark" aria-hidden="true">L</span>
+                    <span class="brand-name">Ledger / Personal</span>
+                </a>
+                <p class="eyebrow">A fresh start</p>
+                <h2 class="auth-title" id="register-title">Create your account</h2>
+                <p class="auth-subtitle">Set up your space and make your money easier to understand.</p>
+                <div th:if="${registrationError}" class="auth-alert error" role="alert" th:text="${registrationError}"></div>
+
+                <form th:action="@{/register}" th:object="${user}" method="post">
+                    <div class="field">
+                        <label class="field-label" for="register-username">Username</label>
+                        <input id="register-username" type="text" th:field="*{username}" class="form-control" placeholder="Choose a username" autocomplete="username" required>
+                    </div>
+                    <div class="field">
+                        <label class="field-label" for="register-email">Email address</label>
+                        <input id="register-email" type="email" th:field="*{email}" class="form-control" placeholder="you@example.com" autocomplete="email" required>
+                    </div>
+                    <div class="field">
+                        <label class="field-label" for="register-password">Password</label>
+                        <input id="register-password" type="password" th:field="*{password}" class="form-control" placeholder="At least 10 characters" autocomplete="new-password" minlength="10" maxlength="72" required>
+                    </div>
+                    <button type="submit" class="primary-button">Create account</button>
+                </form>
+                <p class="auth-switch">Already have an account? <a th:href="@{/login}">Sign in</a></p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
